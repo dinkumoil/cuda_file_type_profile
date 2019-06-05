@@ -1,0 +1,23 @@
+[info]
+title=FileTypeProfile
+desc=Create profiles for files with certain filename extensions and apply the settings automatically when opening a file.
+type=cudatext-plugin
+subdir=cuda_filetypeprofile
+homepage=
+
+[item1]
+section=events
+events=on_close,on_close_pre,on_open,on_save
+
+[item2]
+section=commands
+caption=FileTypeProfile
+method=run
+menu=0
+
+[item100]
+section=commands
+caption=FileTypeProfile\Config
+method=config
+menu=o
+
