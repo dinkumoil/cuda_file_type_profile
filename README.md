@@ -1,10 +1,10 @@
 # FileTypeProfile plugin for CudaText
 
-Create profiles for files with certain filename extensions and apply the
-settings automatically when opening a file.
+**Create profiles for files with certain filename extensions and apply the
+settings automatically when opening a file.**
 
+**This plugin is especially useful when coding Windows Batch scripts.**
 
-This plugin is especially useful when coding Windows Batch scripts.
 
 The Windows console still uses as character encoding schema the old DOS or OEM
 code pages introduced back in the '80s by IBM. In nearly every country another
