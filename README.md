@@ -43,4 +43,5 @@ here: http://wiki.freepascal.org/CudaText#Line_ends
 
 
 Author: Andreas Heim (dinkumoil, at github & sourceforge)
+
 License: MIT
