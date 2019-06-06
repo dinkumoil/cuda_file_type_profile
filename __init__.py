@@ -3,7 +3,7 @@ from cudatext import *
 
 
 # full path to INI file
-fnConfig = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_filetypeprofile.ini')
+fnConfig = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_file_type_profile.ini')
 
 
 # names of keys in INI file
