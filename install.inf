@@ -3,7 +3,7 @@ title=FileTypeProfile
 desc=Create profiles for files with certain filename extensions and apply the settings automatically when opening a file.
 type=cudatext-plugin
 subdir=cuda_filetypeprofile
-homepage=
+homepage=https://github.com/dinkumoil/cuda_file_type_profile
 
 [item1]
 section=events
