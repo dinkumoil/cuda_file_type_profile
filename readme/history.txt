@@ -1,3 +1,17 @@
+================================================================================
+FileTypeProfile plugin for CudaText
+================================================================================
+
+
+1.0.1 (2019-06-06)
+~~~~~~~~~~~~~~~~~~
+
+changed: Filename extensions in INI file now can be noted as semicolon separated
+         list.
+changed: Applied Python coding style recommendations.
+changed: Applied naming conventions for CudaText plugins and their repositories.
+
+
 
 1.0.0 (2019-06-05)
 ~~~~~~~~~~~~~~~~~~
