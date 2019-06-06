@@ -7,14 +7,13 @@ fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_file_type_profile.ini
 
 
 # debug output header
-dbg_header = '(Plugin file_type_profile) '
+dbg_header = '(cuda_file_type_profile) '
 
 
 # names of keys in INI file
-key_file_ext      = 'fileExt'
-key_file_ext_list = 'fileExts'
-key_encoding      = 'encoding'
-key_eol_format    = 'eolFormat'
+key_file_ext_list = 'FileExts'
+key_encoding      = 'Encoding'
+key_eol_format    = 'EolFormat'
 
 
 # data model of INI file
@@ -33,7 +32,6 @@ class Command:
     def do_init(self):
         global fn_config
         global ini_file
-        global key_file_ext
         global key_file_ext_list
         global key_encoding
         global key_eol_format
@@ -41,9 +39,7 @@ class Command:
         # if INI file doesn't exist create it with standard content
         if not os.path.isfile(fn_config):
             ini_write(fn_config, 'Header', 'Version', '1.0')
-            ini_write(fn_config, 'BatchScript', key_file_ext + str(1), '.bat')
-            ini_write(fn_config, 'BatchScript', key_file_ext + str(2), '.cmd')
-            ini_write(fn_config, 'BatchScript', key_file_ext + str(3), '.nt')
+            ini_write(fn_config, 'BatchScript', key_file_ext_list, '.cmd;.bat;.nt')
             ini_write(fn_config, 'BatchScript', key_encoding, '')
             ini_write(fn_config, 'BatchScript', key_eol_format, '')
 
@@ -51,14 +47,14 @@ class Command:
         for ini_section_name in ini_proc(INI_GET_SECTIONS, fn_config):
             # create a dictionary for every INI file section and a list
             # for all filename extensions in the section
-            cur_section   = {}
+            cur_section    = {}
             file_name_exts = []
 
             # iterate over all keys of current section
             for ini_key_name in ini_proc(INI_GET_KEYS, fn_config, ini_section_name):
                 # if key is a filename extension store value in list
-                if ini_key_name.lower().startswith(key_file_ext.lower()):
-                    file_name_exts.append(ini_read(fn_config, ini_section_name, ini_key_name, '').lower())
+                if ini_key_name.lower() == key_file_ext_list.lower():
+                    file_name_exts = ini_read(fn_config, ini_section_name, ini_key_name, '').lower().split(';')
 
                 # if key is an encoding store it in dictionary
                 elif ini_key_name.lower() == key_encoding.lower():
