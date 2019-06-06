@@ -172,10 +172,6 @@ class Command:
         self.do_config()
 
 
-    def run(self):
-        pass
-
-
     def on_open(self, ed_self):
         # change character encoding if necessary
         self.apply_profile_settings(ed_self, 'on_open')

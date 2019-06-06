@@ -9,12 +9,6 @@ homepage=https://github.com/dinkumoil/cuda_file_type_profile
 section=events
 events=on_close,on_close_pre,on_open,on_save
 
-[item2]
-section=commands
-caption=File type profile
-method=run
-menu=0
-
 [item100]
 section=commands
 caption=File type profile\Config
