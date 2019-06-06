@@ -1,5 +1,5 @@
 ================================================================================
-FileTypeProfile plugin for CudaText
+File Type Profile plugin for CudaText
 ================================================================================
 
 Create profiles for files with certain filename extensions and apply the

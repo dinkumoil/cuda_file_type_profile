@@ -1,5 +1,5 @@
 [info]
-title=File type profile
+title=File Type Profile
 desc=Create profiles for files with certain filename extensions and apply the settings automatically when opening a file.
 type=cudatext-plugin
 subdir=cuda_file_type_profile
@@ -11,7 +11,7 @@ events=on_close,on_close_pre,on_open,on_save
 
 [item100]
 section=commands
-caption=File type profile\Config
+caption=File Type Profile\Config
 method=config
 menu=o
 
