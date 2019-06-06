@@ -3,163 +3,169 @@ from cudatext import *
 
 
 # full path to INI file
-fnConfig = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_file_type_profile.ini')
+fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_file_type_profile.ini')
+
+
+# debug output header
+dbg_header = '(Plugin file_type_profile) '
 
 
 # names of keys in INI file
-keyFileExt     = 'fileExt'
-keyFileExtList = 'fileExts'
-keyEncoding    = 'encoding'
-keyEolFormat   = 'eolFormat'
+key_file_ext      = 'fileExt'
+key_file_ext_list = 'fileExts'
+key_encoding      = 'encoding'
+key_eol_format    = 'eolFormat'
 
 
 # data model of INI file
-iniFile = {}
+ini_file = {}
 
 # PROCESSED FILES list
 documents = []
 
 # edit mode flag of INI file
-reloadSettings = False
+reload_settings = False
 
 
 
 class Command:
 
     def do_init(self):
-        global fnConfig
-        global iniFile
-        global keyFileExt
-        global keyFileExtList
-        global keyEncoding
-        global keyEolFormat
+        global fn_config
+        global ini_file
+        global key_file_ext
+        global key_file_ext_list
+        global key_encoding
+        global key_eol_format
 
-        # if settings file doesn't exist create it with standard content
-        if not os.path.isfile(fnConfig):
-            ini_write(fnConfig, 'Header', 'Version', '1.0')
-            ini_write(fnConfig, 'BatchScript', keyFileExt + str(1), '.bat')
-            ini_write(fnConfig, 'BatchScript', keyFileExt + str(2), '.cmd')
-            ini_write(fnConfig, 'BatchScript', keyFileExt + str(3), '.nt')
-            ini_write(fnConfig, 'BatchScript', keyEncoding, '')
-            ini_write(fnConfig, 'BatchScript', keyEolFormat, '')
+        # if INI file doesn't exist create it with standard content
+        if not os.path.isfile(fn_config):
+            ini_write(fn_config, 'Header', 'Version', '1.0')
+            ini_write(fn_config, 'BatchScript', key_file_ext + str(1), '.bat')
+            ini_write(fn_config, 'BatchScript', key_file_ext + str(2), '.cmd')
+            ini_write(fn_config, 'BatchScript', key_file_ext + str(3), '.nt')
+            ini_write(fn_config, 'BatchScript', key_encoding, '')
+            ini_write(fn_config, 'BatchScript', key_eol_format, '')
 
-        # iterate over all sections of the settings INI file
-        for iniSectionName in ini_proc(INI_GET_SECTIONS, fnConfig):
+        # iterate over all sections of the INI file
+        for ini_section_name in ini_proc(INI_GET_SECTIONS, fn_config):
             # create a dictionary for every INI file section and a list
             # for all filename extensions in the section
-            curSection   = {}
-            filenameExts = []
+            cur_section   = {}
+            file_name_exts = []
 
             # iterate over all keys of current section
-            for iniKeyName in ini_proc(INI_GET_KEYS, fnConfig, iniSectionName):
+            for ini_key_name in ini_proc(INI_GET_KEYS, fn_config, ini_section_name):
                 # if key is a filename extension store value in list
-                if iniKeyName.lower().startswith(keyFileExt.lower()):
-                    filenameExts.append(ini_read(fnConfig, iniSectionName, iniKeyName, '').lower())
+                if ini_key_name.lower().startswith(key_file_ext.lower()):
+                    file_name_exts.append(ini_read(fn_config, ini_section_name, ini_key_name, '').lower())
 
                 # if key is an encoding store it in dictionary
-                elif iniKeyName.lower() == keyEncoding.lower():
-                    curSection[keyEncoding] = ini_read(fnConfig, iniSectionName, iniKeyName, '').lower()
+                elif ini_key_name.lower() == key_encoding.lower():
+                    cur_section[key_encoding] = ini_read(fn_config, ini_section_name, ini_key_name, '').lower()
 
                 # if key is an EOL format store it in dictionary
-                elif iniKeyName.lower() == keyEolFormat.lower():
-                    curSection[keyEolFormat] = ini_read(fnConfig, iniSectionName, iniKeyName, '').lower()
+                elif ini_key_name.lower() == key_eol_format.lower():
+                    cur_section[key_eol_format] = ini_read(fn_config, ini_section_name, ini_key_name, '').lower()
 
             # if we have a list of filename extensions
             # store section's dictionary in main dictionary of INI file
-            if len(filenameExts) > 0:
-                curSection[keyFileExtList] = filenameExts
-                iniFile[iniSectionName] = curSection
+            if len(file_name_exts) > 0:
+                cur_section[key_file_ext_list] = file_name_exts
+                ini_file[ini_section_name] = cur_section
 
 
     def do_config(self):
-        # load settings file and set flag that it's in edit mode
-        global fnConfig
-        global reloadSettings
+        # load INI file and set flag that it's in edit mode
+        global fn_config
+        global reload_settings
 
-        file_open(fnConfig)
-        reloadSettings = True
+        file_open(fn_config)
+        reload_settings = True
 
 
-    def do_ApplyProfileSettings(self, editor, fileNameFull, fileExtension):
-        global iniFile
+    def do_apply_profile_settings(self, editor, file_name_full, file_extension):
+        global ini_file
         global documents
-        global keyFileExt
-        global keyFileExtList
-        global keyEncoding
-        global keyEolFormat
+        global key_file_ext
+        global key_file_ext_list
+        global key_encoding
+        global key_eol_format
 
-        settingsApplied = False
+        settings_applied = False
 
         # if the current document hasn't been processed yet ...
-        if fileNameFull not in documents:
+        if file_name_full not in documents:
             # ...iterate over all INI file sections
-            for sectionName, sectionItems in iniFile.items():
+            for sectionName, section_items in ini_file.items():
                 # if the current section contains a list of file extensions
                 # and the file's extension is part of that list ...
-                if keyFileExtList in sectionItems and fileExtension.lower() in sectionItems[keyFileExtList]:
+                if key_file_ext_list in section_items and file_extension.lower() in section_items[key_file_ext_list]:
                     # ...check if section has valid key for character encoding
-                    if keyEncoding in sectionItems and sectionItems[keyEncoding] != '':
+                    if key_encoding in section_items and section_items[key_encoding] != '':
                         # switch character encoding
-                        editor.set_prop(PROP_ENC, sectionItems[keyEncoding])
-                        settingsApplied = True
+                        editor.set_prop(PROP_ENC, section_items[key_encoding])
+                        settings_applied = True
 
                     # ...check if section has valid key for EOL format
-                    if keyEolFormat in sectionItems and sectionItems[keyEolFormat] != '':
+                    if key_eol_format in section_items and section_items[key_eol_format] != '':
                         # switch EOL format
-                        editor.set_prop(PROP_NEWLINE, sectionItems[keyEolFormat])
-                        settingsApplied = True
+                        editor.set_prop(PROP_NEWLINE, section_items[key_eol_format])
+                        settings_applied = True
 
                     # if settings have been applied, remember that file has been
                     # processed in PROCESSED FILES list and return CHANGED to caller
-                    if settingsApplied:
-                        documents.append(fileNameFull)
+                    if settings_applied:
+                        documents.append(file_name_full)
                         return True
 
         # return NOTHING CHANGED to caller
         return False
 
 
-    def do_SaveFile(self, editor):
-        global fnConfig
-        global iniFile
-        global reloadSettings
+    def do_save_file(self, editor):
+        # if saved file is INI file discard its data model and reload it
+        global fn_config
+        global ini_file
+        global reload_settings
 
-        if reloadSettings and editor.get_filename('*').lower() == fnConfig.lower():
-            iniFile = {}
+        if reload_settings and editor.get_filename('*').lower() == fn_config.lower():
+            ini_file = {}
             self.do_init()
-            print('(FileTypeProfile) Settings file has been reloaded')
+            print(dbg_header + 'Settings file has been reloaded')
 
 
-    def do_PreCloseFile(self, editor):
-        global fnConfig
-        global reloadSettings
+    def do_pre_close_file(self, editor):
+        # reset flag for INI file's edit mode
+        global fn_config
+        global reload_settings
 
-        if reloadSettings and editor.get_filename('*').lower() == fnConfig.lower():
-            reloadSettings = False
+        if reload_settings and editor.get_filename('*').lower() == fn_config.lower():
+            reload_settings = False
 
 
-    def ApplyProfileSettings(self, editor, caller):
+    def apply_profile_settings(self, editor, caller):
         # retrieve full filename and extension (including dot)
-        fileNameFull = editor.get_filename('*')
-        fileName, fileExtension = os.path.splitext(fileNameFull)
+        file_name_full = editor.get_filename('*')
+        file_name, file_extension = os.path.splitext(file_name_full)
 
         # check if character encoding has been changed
         # and output log message to console
-        if self.do_ApplyProfileSettings(editor, fileNameFull, fileExtension):
-            print('(FileTypeProfile) ' + caller + " applied settings: " + fileNameFull)
+        if self.do_apply_profile_settings(editor, file_name_full, file_extension):
+            print(dbg_header + 'Method ' + caller + ' applied settings on file: ' + file_name_full)
 
 
-    def UnregisterFile(self, editor, caller):
+    def unregister_file(self, editor, caller):
         global documents
 
         # retrieve full filename
-        fileNameFull = editor.get_filename('*')
+        file_name_full = editor.get_filename('*')
 
         # check if filename is member of PROCESSED FILES list
         # if yes, remove it from list and output log message to console
-        if fileNameFull in documents:
-            documents.remove(fileNameFull)
-            print('(FileTypeProfile) ' + caller + " unregistered file: " + fileNameFull)
+        if file_name_full in documents:
+            documents.remove(file_name_full)
+            print(dbg_header + 'Method ' + caller + ' unregistered file: ' + file_name_full)
 
 
     def __init__(self):
@@ -176,19 +182,19 @@ class Command:
 
     def on_open(self, ed_self):
         # change character encoding if necessary
-        self.ApplyProfileSettings(ed_self, 'FileOpened')
+        self.apply_profile_settings(ed_self, 'on_open')
 
 
     def on_save(self, ed_self):
-        # if settings file is in editmode reload it and build up its data model
-        self.do_SaveFile(ed_self)
+        # if INI file is in editmode reload it and build up its data model
+        self.do_save_file(ed_self)
 
 
     def on_close_pre(self, ed_self):
-        # reset edit mode flag of settings file
-        self.do_PreCloseFile(ed_self)
+        # reset edit mode flag of INI file
+        self.do_pre_close_file(ed_self)
 
 
     def on_close(self, ed_self):
         # remove file from PROCESSED FILES list
-        self.UnregisterFile(ed_self, 'FileClosed')
+        self.unregister_file(ed_self, 'on_close')
