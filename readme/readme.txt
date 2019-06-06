@@ -22,7 +22,7 @@ plugin can help you.
 You can create profiles for certain file types (distinguished by their file name
 extension, e.g. *.cmd, *.bat) and define the code page and, as a bonus, the
 end-of-line (EOL) format for all files that match one of the related file name
-extension.
+extensions.
 
 When you want to write a Batch script, AT FIRST create in Windows Explorer a new
 file. Name it like you want and set its file name extension. Then open it in
@@ -32,7 +32,7 @@ format according to your configuration.
 When CudaText runs the first time after plugin's installation, the plugin will
 create a default config file in the CudatText settings directory. It contains
 a template profile for Batch script files but lacks the values for all possible
-settings. Set them, especially the "encoding" key according to your needs.
+settings. Set them, especially the "encoding" key, according to your needs.
 
 Possible values for the "encoding" setting you can find in the CudaText wiki,
 see here: http://wiki.freepascal.org/CudaText#Encodings
