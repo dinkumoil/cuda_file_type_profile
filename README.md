@@ -43,7 +43,7 @@ template profiles for Batch script and Linux shell script files but lacks the
 value for Batch script's _Encoding_ key. Set it according to your needs.
 
 If you want to change the plugin's config file, navigate to
-`(menu) Options -> Settings - plugins -> File type profile -> Config`. The
+`(menu) Options -> Settings - plugins -> File Type Profile -> Config`. The
 config file will be opened. Edit its content and save it. In that moment the
 plugin will automatically reload the file and update its configuration. **Please
 note:** Only newly opened files will be affected by the updated configuration,
