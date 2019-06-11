@@ -39,8 +39,8 @@ EOL format according to your configuration.
 
 When CudaText runs the first time after plugin's installation, the plugin will
 create a default config file in the CudatText settings directory. It contains
-a template profile for Batch script files but lacks the values for all possible
-settings. Set them, especially the _Encoding_ key, according to your needs.
+template profiles for Batch script and Linux shell script files but lacks the
+value for Batch script's _Encoding_ key. Set it according to your needs.
 
 If you want to change the plugin's config file, navigate to
 `(menu) Options -> Settings - plugins -> File type profile -> Config`. The

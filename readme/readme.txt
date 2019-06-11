@@ -37,15 +37,15 @@ You can create profiles for certain file types (distinguished by their filename
 extension, e.g. *.cmd, *.bat) and define the code page and/or the end-of-line
 (EOL) format that should be set when a file matching a profile has been loaded.
 
-When you want to start writeing a script, AT FIRST create in Windows Explorer a
+When you want to start writing a script, AT FIRST create in Windows Explorer a
 new file. Name it like you want and set its filename extension. Then open it in
 CudaText. The plugin will automatically set the character encoding and/or the
 EOL format according to your configuration.
 
 When CudaText runs the first time after plugin's installation, the plugin will
 create a default config file in the CudatText settings directory. It contains
-a template profile for Batch script files but lacks the values for all possible
-settings. Set them, especially the "Encoding" key, according to your needs.
+template profiles for Batch script and Linux shell script files but lacks the
+value for Batch script's "Encoding" key. Set it according to your needs.
 
 If you want to change the plugin's config file, navigate to
 

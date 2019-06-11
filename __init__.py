@@ -6,15 +6,14 @@ from cudatext import *
 # full path to INI file
 fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_file_type_profile.ini')
 
-
-# debug output header
-dbg_header = '(cuda_file_type_profile) '
-
-
 # names of keys in INI file
 key_file_ext_list = 'FileExts'
 key_encoding      = 'Encoding'
 key_eol_format    = 'EolFormat'
+
+
+# debug output header
+dbg_header = '(cuda_file_type_profile) '
 
 
 # data model of INI file
@@ -27,6 +26,7 @@ documents = []
 reload_settings = False
 
 
+# mapping of encoding names to commands for encoding switching
 enc_map = {
     'utf8'        : cudatext_cmd.cmd_Encoding_utf8nobom_Reload,
     'utf8_bom'    : cudatext_cmd.cmd_Encoding_utf8bom_Reload,
@@ -58,6 +58,7 @@ enc_map = {
 }
 
 
+# mapping of EOL format names to commands for EOL format switching
 eol_map = {
     'crlf' : cudatext_cmd.cmd_LineEndWin,
     'lf'   : cudatext_cmd.cmd_LineEndUnix,
@@ -81,7 +82,8 @@ class Command:
             ini_write(fn_config, 'Header', 'Version', '1.0')
             ini_write(fn_config, 'BatchScript', key_file_ext_list, '.cmd;.bat;.nt')
             ini_write(fn_config, 'BatchScript', key_encoding, '')
-            ini_write(fn_config, 'BatchScript', key_eol_format, '')
+            ini_write(fn_config, 'ShellScript', key_file_ext_list, '.sh')
+            ini_write(fn_config, 'ShellScript', key_eol_format, 'lf')
 
         # iterate over all sections of the INI file
         for ini_section_name in ini_proc(INI_GET_SECTIONS, fn_config):
@@ -153,9 +155,14 @@ class Command:
                         editor.cmd(eol_map[section_items[key_eol_format].lower()])
                         settings_applied = True
 
-                    # if file has been processed return CHANGED to caller
+                    # if file has been processed, return CHANGED to caller
                     if settings_applied:
                         return True
+                    # if not, there are no valid settings for the file's type
+                    # thus stop processing of INI file and return NOTHING
+                    # CHANGED to caller
+                    else:
+                        return False
 
         # return NOTHING CHANGED to caller
         return False

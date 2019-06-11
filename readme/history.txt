@@ -3,6 +3,17 @@ File Type Profile plugin for CudaText
 ================================================================================
 
 
+1.0.2 (2019-06-11)
+~~~~~~~~~~~~~~~~~~
+
+changed: Default settings file created after first launch of plugin now contains
+         a profile for Linux shell scripts (file type .sh).
+changed: If a file type's profile contains no valid settings, processing of INI
+         file is stopped now instead of searching the file type in other
+         profiles.
+
+
+
 1.0.1 (2019-06-06)
 ~~~~~~~~~~~~~~~~~~
 
