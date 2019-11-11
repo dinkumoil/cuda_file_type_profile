@@ -177,7 +177,7 @@ class Command:
         if reload_settings and editor.get_filename('*').lower() == fn_config.lower():
             ini_file = {}
             self.do_init()
-            print(dbg_header + 'Settings file has been reloaded')
+            # print(dbg_header + 'Settings file has been reloaded')
 
 
     def do_pre_close_file(self, editor):
@@ -197,7 +197,8 @@ class Command:
         # check if character encoding has been changed
         # and output log message to console
         if self.do_apply_profile_settings(editor, file_name_full, file_extension):
-            print(dbg_header + 'Method ' + caller + ' applied settings on file: ' + file_name_full)
+            # print(dbg_header + 'Method ' + caller + ' applied settings on file: ' + file_name_full)
+            pass
 
 
     def unregister_file(self, editor, caller):
@@ -210,7 +211,7 @@ class Command:
         # if yes, remove it from list and output log message to console
         if file_name_full in documents:
             documents.remove(file_name_full)
-            print(dbg_header + 'Method ' + caller + ' unregistered file: ' + file_name_full)
+            # print(dbg_header + 'Method ' + caller + ' unregistered file: ' + file_name_full)
 
 
     def __init__(self):
