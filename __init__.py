@@ -34,6 +34,10 @@ enc_map = {
     'utf16le_bom' : cudatext_cmd.cmd_Encoding_utf16le_Reload,
     'utf16be'     : cudatext_cmd.cmd_Encoding_utf16be_Reload,
     'utf16be_bom' : cudatext_cmd.cmd_Encoding_utf16be_Reload,
+    'utf32le'     : cudatext_cmd.cmd_Encoding_utf32le_Reload,
+    'utf32le_bom' : cudatext_cmd.cmd_Encoding_utf32le_Reload,
+    'utf32be'     : cudatext_cmd.cmd_Encoding_utf32be_Reload,
+    'utf32be_bom' : cudatext_cmd.cmd_Encoding_utf32be_Reload,
     'cp1250'      : cudatext_cmd.cmd_Encoding_cp1250_Reload,
     'cp1251'      : cudatext_cmd.cmd_Encoding_cp1251_Reload,
     'cp1252'      : cudatext_cmd.cmd_Encoding_cp1252_Reload,
@@ -54,6 +58,7 @@ enc_map = {
     'cp950'       : cudatext_cmd.cmd_Encoding_cp950_Reload,
     'iso88591'    : cudatext_cmd.cmd_Encoding_iso1_Reload,
     'iso88592'    : cudatext_cmd.cmd_Encoding_iso2_Reload,
+    'iso885915'   : cudatext_cmd.cmd_Encoding_iso15_Reload,
     'mac'         : cudatext_cmd.cmd_Encoding_mac_Reload
 }
 
