@@ -4,7 +4,7 @@ desc=Create profiles for files with certain filename extensions and apply the se
 type=cudatext-plugin
 subdir=cuda_file_type_profile
 homepage=https://github.com/dinkumoil/cuda_file_type_profile
-api=1.0.317
+api=1.0.325
 
 [item1]
 section=events

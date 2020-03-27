@@ -42,6 +42,11 @@ new file. Name it like you want and set its filename extension. Then open it in
 CudaText. The plugin will automatically set the character encoding and/or the
 EOL format according to your configuration.
 
+The plugin doesn't change encoding or end-of-line format of a file if it is part
+of a session or of the file history. That means you can override automatically
+set encoding or EOL format and it will be restored at next time the file is
+opened.
+
 When CudaText runs the first time after plugin's installation, the plugin will
 create a default config file in the CudatText settings directory. It contains
 template profiles for Batch script and Linux shell script files but lacks the

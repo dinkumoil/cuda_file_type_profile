@@ -137,8 +137,11 @@ class Command:
 
         settings_applied = False
 
-        # if the current document hasn't been processed yet ...
-        if file_name_full not in documents:
+        # if the current document is NOT part of a saved session or file history
+        # and also hasn't been processed yet ...
+        if (not editor.get_prop(PROP_IN_SESSION, file_name_full) and
+            not editor.get_prop(PROP_IN_HISTORY, file_name_full) and
+            file_name_full not in documents):
             # ...iterate over all INI file sections
             for sectionName, section_items in ini_file.items():
                 # if the current section contains a list of file extensions

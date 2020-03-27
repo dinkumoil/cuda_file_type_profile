@@ -3,6 +3,16 @@ File Type Profile plugin for CudaText
 ================================================================================
 
 
+1.0.5 (2020-03-27)
+~~~~~~~~~~~~~~~~~~
+
+enhanced: Plugin ignores files which are part of a session or the file history.
+          This way users can override automatically set file encoding and EOL
+          format and it will be restored next time the file is opened.
+          Requires at least CudaText v1.97.5.2
+
+
+
 1.0.4 (2019-12-15)
 ~~~~~~~~~~~~~~~~~~
 
