@@ -13,6 +13,7 @@ events=on_open,on_close~
 [item2]
 section=events
 events=on_save~
+lexers=Ini files
 
 [item100]
 section=commands
