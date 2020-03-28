@@ -22,9 +22,6 @@ ini_file = {}
 # PROCESSED FILES list
 documents = []
 
-# edit mode flag of INI file
-reload_settings = False
-
 
 # mapping of encoding names to commands for encoding switching
 enc_map = {
@@ -121,10 +118,8 @@ class Command:
     def do_config(self):
         # load INI file and set flag that it's in edit mode
         global fn_config
-        global reload_settings
 
         file_open(fn_config)
-        reload_settings = True
 
 
     def do_apply_profile_settings(self, editor, file_name_full, file_extension):
@@ -180,21 +175,11 @@ class Command:
         # if saved file is INI file discard its data model and reload it
         global fn_config
         global ini_file
-        global reload_settings
 
-        if reload_settings and editor.get_filename('*').lower() == fn_config.lower():
+        if editor.get_filename('*').lower() == fn_config.lower():
             ini_file = {}
             self.do_init()
             # print(dbg_header + 'Settings file has been reloaded')
-
-
-    def do_pre_close_file(self, editor):
-        # reset flag for INI file's edit mode
-        global fn_config
-        global reload_settings
-
-        if reload_settings and editor.get_filename('*').lower() == fn_config.lower():
-            reload_settings = False
 
 
     def apply_profile_settings(self, editor, caller):
@@ -238,11 +223,6 @@ class Command:
     def on_save(self, ed_self):
         # if INI file is in editmode reload it and build up its data model
         self.do_save_file(ed_self)
-
-
-    def on_close_pre(self, ed_self):
-        # reset edit mode flag of INI file
-        self.do_pre_close_file(ed_self)
 
 
     def on_close(self, ed_self):
