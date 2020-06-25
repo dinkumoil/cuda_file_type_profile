@@ -23,43 +23,6 @@ ini_file = {}
 documents = []
 
 
-# mapping of encoding names to commands for encoding switching
-enc_map = {
-    'utf8'        : cudatext_cmd.cmd_Encoding_utf8nobom_Reload,
-    'utf8_bom'    : cudatext_cmd.cmd_Encoding_utf8bom_Reload,
-    'utf16le'     : cudatext_cmd.cmd_Encoding_utf16le_Reload,
-    'utf16le_bom' : cudatext_cmd.cmd_Encoding_utf16le_Reload,
-    'utf16be'     : cudatext_cmd.cmd_Encoding_utf16be_Reload,
-    'utf16be_bom' : cudatext_cmd.cmd_Encoding_utf16be_Reload,
-    'utf32le'     : cudatext_cmd.cmd_Encoding_utf32le_Reload,
-    'utf32le_bom' : cudatext_cmd.cmd_Encoding_utf32le_Reload,
-    'utf32be'     : cudatext_cmd.cmd_Encoding_utf32be_Reload,
-    'utf32be_bom' : cudatext_cmd.cmd_Encoding_utf32be_Reload,
-    'cp1250'      : cudatext_cmd.cmd_Encoding_cp1250_Reload,
-    'cp1251'      : cudatext_cmd.cmd_Encoding_cp1251_Reload,
-    'cp1252'      : cudatext_cmd.cmd_Encoding_cp1252_Reload,
-    'cp1253'      : cudatext_cmd.cmd_Encoding_cp1253_Reload,
-    'cp1254'      : cudatext_cmd.cmd_Encoding_cp1254_Reload,
-    'cp1255'      : cudatext_cmd.cmd_Encoding_cp1255_Reload,
-    'cp1256'      : cudatext_cmd.cmd_Encoding_cp1256_Reload,
-    'cp1257'      : cudatext_cmd.cmd_Encoding_cp1257_Reload,
-    'cp1258'      : cudatext_cmd.cmd_Encoding_cp1258_Reload,
-    'cp437'       : cudatext_cmd.cmd_Encoding_cp437_Reload,
-    'cp850'       : cudatext_cmd.cmd_Encoding_cp850_Reload,
-    'cp852'       : cudatext_cmd.cmd_Encoding_cp852_Reload,
-    'cp866'       : cudatext_cmd.cmd_Encoding_cp866_Reload,
-    'cp874'       : cudatext_cmd.cmd_Encoding_cp874_Reload,
-    'cp932'       : cudatext_cmd.cmd_Encoding_cp932_Reload,
-    'cp936'       : cudatext_cmd.cmd_Encoding_cp936_Reload,
-    'cp949'       : cudatext_cmd.cmd_Encoding_cp949_Reload,
-    'cp950'       : cudatext_cmd.cmd_Encoding_cp950_Reload,
-    'iso88591'    : cudatext_cmd.cmd_Encoding_iso1_Reload,
-    'iso88592'    : cudatext_cmd.cmd_Encoding_iso2_Reload,
-    'iso885915'   : cudatext_cmd.cmd_Encoding_iso15_Reload,
-    'mac'         : cudatext_cmd.cmd_Encoding_mac_Reload
-}
-
-
 # mapping of EOL format names to commands for EOL format switching
 eol_map = {
     'crlf' : cudatext_cmd.cmd_LineEndWin,
@@ -143,11 +106,11 @@ class Command:
                 # and the file's extension is part of that list ...
                 if key_file_ext_list in section_items and file_extension.lower() in section_items[key_file_ext_list]:
                     # ...check if section has valid key for character encoding
-                    if key_encoding in section_items and section_items[key_encoding].lower() in enc_map:
+                    if key_encoding in section_items:
                         # switch character encoding, remember that file has been
                         # processed in PROCESSED FILES list
                         documents.append(file_name_full)
-                        editor.cmd(enc_map[section_items[key_encoding].lower()])
+                        editor.set_prop(PROP_ENC_RELOAD, section_items[key_encoding].lower())
                         settings_applied = True
 
                     # ...check if section has valid key for EOL format

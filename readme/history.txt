@@ -3,6 +3,14 @@ File Type Profile plugin for CudaText
 ================================================================================
 
 
+1.0.6 (2020-06-25)
+~~~~~~~~~~~~~~~~~~
+
+changed: Use new API PROP_ENC_RELOAD, thus it's not necessary anymore to update
+         plugin if character encodings are added/removed in the future.
+
+
+
 1.0.5 (2020-03-27)
 ~~~~~~~~~~~~~~~~~~
 
