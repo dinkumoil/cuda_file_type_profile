@@ -1,7 +1,7 @@
 # File Type Profile plugin for CudaText
 
 **Create profiles for files with certain filename extensions and apply the
-settings automatically when opening a file.**
+settings automatically when opening or reopening a file.**
 
 **This plugin is especially useful when coding Windows Batch scripts or if you
 have to write, for whatever reason, e.g. Linux shell scripts on a Windows
