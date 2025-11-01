@@ -183,6 +183,11 @@ class Command:
         self.apply_profile_settings(ed_self, 'on_open')
 
 
+    def on_open_reopen(self, ed_self):
+        # change character encoding if necessary
+        self.apply_profile_settings(ed_self, 'on_open_reopen')
+
+
     def on_save(self, ed_self):
         # if INI file is in editmode reload it and build up its data model
         self.do_save_file(ed_self)
