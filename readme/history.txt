@@ -8,7 +8,7 @@ File Type Profile plugin for CudaText
 
 enhanced: Use new event on_open_reopen, so plugin is able to kick in when file
           is reopened manually or automatically from file-change-notification
-          etc. Requires at least CudaText v1.229.1
+          etc.
 
 
 
