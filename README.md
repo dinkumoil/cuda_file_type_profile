@@ -37,6 +37,12 @@ new file. Name it like you want and set its filename extension. Then open it in
 CudaText. The plugin will automatically set the character encoding and/or the
 EOL format according to your configuration.
 
+Another approach is to create a new file in CudaText using "File -> New file"
+or clicking the "Add tab" button in the tab bar, then save it to its desired
+location using a filename extension that is managed by the plugin and finally
+use "File -> Reopen" to reload the file. This will also trigger the plugin to
+set the character encoding and/or the EOL format.
+
 The plugin doesn't change encoding or end-of-line format of a file if it is part
 of a session or of the file history. That means you can override automatically
 set encoding or EOL format and it will be restored at next time the file is
