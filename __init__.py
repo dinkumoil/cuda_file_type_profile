@@ -97,8 +97,7 @@ class Command:
 
         # if the current document is NOT part of a saved session or file history
         # and also hasn't been processed yet ...
-        if (not editor.get_prop(PROP_IN_SESSION, file_name_full) and
-            not editor.get_prop(PROP_IN_HISTORY, file_name_full) and
+        if (not editor.get_prop(PROP_IN_SESSION, '') and
             file_name_full not in documents):
             # ...iterate over all INI file sections
             for sectionName, section_items in ini_file.items():
