@@ -138,7 +138,7 @@ class Command:
         global fn_config
         global ini_file
 
-        if editor.get_filename('*').lower() == fn_config.lower():
+        if editor.get_prop(PROP_FN, '*').lower() == fn_config.lower():
             ini_file = {}
             self.do_init()
             # print(dbg_header + 'Settings file has been reloaded')
@@ -146,7 +146,7 @@ class Command:
 
     def apply_profile_settings(self, editor, caller):
         # retrieve full filename and extension (including dot)
-        file_name_full = editor.get_filename('*')
+        file_name_full = editor.get_prop(PROP_FN, '*')
         file_name, file_extension = os.path.splitext(file_name_full)
 
         # check if character encoding has been changed
@@ -160,7 +160,7 @@ class Command:
         global documents
 
         # retrieve full filename
-        file_name_full = editor.get_filename('*')
+        file_name_full = editor.get_prop(PROP_FN, '*')
 
         # check if filename is member of PROCESSED FILES list
         # if yes, remove it from list and output log message to console
